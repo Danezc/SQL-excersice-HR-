@@ -1,0 +1,76 @@
+Hacker Rank, ejercicio 11
+Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
+
+SELECT DISTINCT(CITY) 
+FROM STATION
+WHERE REGEXP_LIKE(CITY,'^[aeiouAEIOU]');
+
+Más información sobre REGEXP_LIKE en :https://www.techonthenet.com/oracle/regexp_like.php
+
+Hacker Rank, ejercicio 12
+Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+
+SELECT DISTINCT(CITY)
+FROM STATION
+WHERE REGEXP_LIKE(CITY, '[AEIOU]$');
+
+Hacker Rank, ejercicio 13
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+
+SELECT DISTINCT(CITY)
+FROM STATION
+WHERE REGEXP_LIKE(CITY, '^[aeiouAEIOU]') AND REGEXP_LIKE(CITY, '[aeiouAEIOU]$');
+
+Hacker Rank, ejercicio 14
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+SELECT CITY
+FROM STATION
+WHERE NOT REGEXP_LIKE(CITY,'^[aeiou]')
+GROUP BY CITY;
+
+Hacker Rank, ejercicio 15
+Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+
+SELECT DISTINCT(CITY)
+FROM STATION
+WHERE NOT REGEXP_LIKE (CITY,'[aeiou]$')
+GROUP BY CITY;
+
+Hacker Rank, ejercicio 16
+Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+
+SELECT DISTINCT(CITY)
+FROM STATION 
+WHERE CITY RLIKE '^[^aeiouAEIOU].*[^AEIOUaeiou]$';
+
+Hacker Rank, ejercicio 17
+Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+
+SELECT Name 
+FROM STUDENTS 
+WHERE Marks > 75
+ORDER BY RIGHT(Name, 3), ID; 
+
+Hacker Rank, ejercicio 18
+Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+
+SELECT name
+FROM Employee
+ORDER BY name;
+
+Hacker rank, ejercicio 19
+Write a query that prints a list of employee names (i.e.: the name attribute) for employees in Employee having a salary greater than 2000 per month who have been employees for less than 10 months. Sort your result by ascending employee_id.
+
+SELECT name
+FROM Employee 
+WHERE salary > 2000 AND months < 10
+ORDER BY employee_id ASC;
+
+Hacker Rank, ejercicio 20
+Given the CITY and COUNTRY tables, query the names of all the continents (COUNTRY.Continent) and their respective average city populations (CITY.Population) rounded down to the nearest integer.
+
+SELECT C.CONTINENT, FLOOR(AVG(CT.POPULATION))
+FROM COUNTRY C
+INNER JOIN CITY CT ON CT.COUNTRYCODE = C.CODE
+GROUP BY C.CONTINENT; 
